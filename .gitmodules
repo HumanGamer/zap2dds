@@ -1,0 +1,6 @@
+[submodule "vendor/save_dds"]
+	path = vendor/save_dds
+	url = https://github.com/HumanGamer/save_dds
+[submodule "vendor/libzap"]
+	path = vendor/libzap
+	url = https://github.com/HumanGamer/libzap
