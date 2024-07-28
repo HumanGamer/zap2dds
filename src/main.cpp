@@ -1,5 +1,5 @@
 #include <iostream>
-#include <zap.h>
+#include <libzap.h>
 #include <savedds.h>
 #include <stb_image_write.h>
 
@@ -32,7 +32,8 @@ int main(int argc, char *argv[])
     int width = 0;
     int height = 0;
 
-    if(!load_zap_file(input_file.c_str(), &data, &size, &width, &height))
+    zap_error_t err = zap_load(input_file.c_str(), ZAP_COLOR_FORMAT_RGBA32, &data, &size, &width, &height);
+    if(err != ZAP_ERROR_NONE)
     {
         std::cerr << "Failed to load file: " << input_file << std::endl;
         return 1;
@@ -45,7 +46,7 @@ int main(int argc, char *argv[])
 #else
         savedds(output_file.c_str(), data, width, height, 32);
 #endif
-        delete[] data;
+        zap_free(data);
 
         std::cout << "Saved to: " << output_file << std::endl;
     }
